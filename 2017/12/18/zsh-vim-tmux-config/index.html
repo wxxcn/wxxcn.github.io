@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="zsh,vim,tmux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="综述本文主要介绍了配置zsh，安装配置vim插件，以及安装tmux等。本文主要参考了以下链接：  [oh-my-zsh]https://github.com/robbyrussell/oh-my-zsh [powerlevel9k]https://github.com/bhilburn/powerlevel9k [wesome-terminal-fonts]https://github.com/g">
+<meta name="keywords" content="zsh,vim,tmux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zsh-vim-tmux-config">
+<meta property="og:url" content="http://yoursite.com/2017/12/18/zsh-vim-tmux-config/index.html">
+<meta property="og:site_name" content="wxxcn&#39;s blog">
+<meta property="og:description" content="综述本文主要介绍了配置zsh，安装配置vim插件，以及安装tmux等。本文主要参考了以下链接：  [oh-my-zsh]https://github.com/robbyrussell/oh-my-zsh [powerlevel9k]https://github.com/bhilburn/powerlevel9k [wesome-terminal-fonts]https://github.com/g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-18T12:01:50.991Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zsh-vim-tmux-config">
+<meta name="twitter:description" content="综述本文主要介绍了配置zsh，安装配置vim插件，以及安装tmux等。本文主要参考了以下链接：  [oh-my-zsh]https://github.com/robbyrussell/oh-my-zsh [powerlevel9k]https://github.com/bhilburn/powerlevel9k [wesome-terminal-fonts]https://github.com/g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/18/zsh-vim-tmux-config/"/>
+
+
+
+
+
+  <title>zsh-vim-tmux-config | wxxcn's blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wxxcn's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/18/zsh-vim-tmux-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxxcn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wxxcn's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">zsh-vim-tmux-config</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T15:51:45+08:00">
+                2017-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/18/zsh-vim-tmux-config/" class="leancloud_visitors" data-flag-title="zsh-vim-tmux-config">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍了配置zsh，安装配置vim插件，以及安装tmux等。本文主要参考了以下链接：</p>
+<ol>
+<li>[oh-my-zsh]<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">https://github.com/robbyrussell/oh-my-zsh</a></li>
+<li>[powerlevel9k]<a href="https://github.com/bhilburn/powerlevel9k" target="_blank" rel="noopener">https://github.com/bhilburn/powerlevel9k</a></li>
+<li>[wesome-terminal-fonts]<a href="https://github.com/gabrielelana/awesome-terminal-fonts" target="_blank" rel="noopener">https://github.com/gabrielelana/awesome-terminal-fonts</a></li>
+<li>[Powerline Fonts]<a href="https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation" target="_blank" rel="noopener">https://powerline.readthedocs.io/en/latest/installation/linux.html#fonts-installation</a></li>
+<li>[tmux]<a href="https://github.com/tmux/tmux" target="_blank" rel="noopener">https://github.com/tmux/tmux</a></li>
+<li>[vundle]<a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener">https://github.com/VundleVim/Vundle.vim</a></li>
+<li>[vim插件库]<a href="https://vimawesome.com/" target="_blank" rel="noopener">https://vimawesome.com/</a></li>
+</ol>
+<h1 id="安装配置zsh"><a href="#安装配置zsh" class="headerlink" title="安装配置zsh"></a>安装配置zsh</h1><h2 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h2><p>Debian系可以直接通过以下命令安装zsh:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br></pre></td></tr></table></figure></p>
+<p>此时，执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat /etc/shells # 查看所有shell</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span> <span class="comment"># 查看默认shell</span></span><br><span class="line"><span class="comment"># chsh -c $(which zsh) # 修改默认shell</span></span><br></pre></td></tr></table></figure></p>
+<p>通过查看默认shell,发现没什么变化，别急，这才刚刚开始。网上有大神写了配置zsh的脚本文件，为大多数人所采纳，不必担心shell中注入恶意代码，安装方式如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p>安装完之后，重启所有终端即可进入zsh。</p>
+<h2 id="配置zsh"><a href="#配置zsh" class="headerlink" title="配置zsh"></a>配置zsh</h2><h3 id="安装powerlevel9k"><a href="#安装powerlevel9k" class="headerlink" title="安装powerlevel9k"></a>安装powerlevel9k</h3><p>在终端下输入以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k</span><br></pre></td></tr></table></figure></p>
+<p>即安装完毕</p>
+<h3 id="安装awesome-terminal-fonts"><a href="#安装awesome-terminal-fonts" class="headerlink" title="安装awesome-terminal-fonts"></a>安装awesome-terminal-fonts</h3><p>在终端下执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/gabrielelana/awesome-terminal-fonts.git</span><br></pre></td></tr></table></figure></p>
+<p>将fonts clone到本地，然后执行以下命令，将awesome-terminal-fonts/build目录下的文件拷贝到~/.fonts目录下，如果没有~/.fonts目录则创建一个。命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> awesome-terminal-fonts</span><br><span class="line">cp ./build/* ~/.fonts/*</span><br><span class="line"><span class="built_in">fc</span>-cache -fv ~/.fonts</span><br><span class="line">cp ./config/10-symbols.conf ~/.config/fontconfig/conf.d</span><br><span class="line"><span class="comment"># 若~/.config/fontconfig/conf.d不存在，则按照如下命令创建</span></span><br><span class="line"><span class="comment"># mkdir ~/.config/fontconfig/conf.d -p</span></span><br></pre></td></tr></table></figure></p>
+<p>执行完上述命令后，打开.zshrc文件，在其中加入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.fonts/*.sh</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置zsh-1"><a href="#配置zsh-1" class="headerlink" title="配置zsh"></a>配置zsh</h3><p>打开.zshrc，在其中添加或修改以下内容，注意POWERLEVEL9K_MODE=’awesome-fontconfig’需放置在ZSH_THEME=”powerlevel9k/powerlevel9k”之前。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 6 export TERM=&quot;xterm-256color&quot;</span><br><span class="line"> 7 # Set name of the theme to load. Optionally, if you set this to &quot;random&quot;</span><br><span class="line"> 8 # it&apos;ll load a random theme each time that oh-my-zsh is loaded.</span><br><span class="line"> 9 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</span><br><span class="line">10 # ZSH_THEME=&quot;robbyrussell&quot;</span><br><span class="line">11 POWERLEVEL9K_MODE=&apos;awesome-fontconfig&apos;</span><br><span class="line">12 ZSH_THEME=&quot;powerlevel9k/powerlevel9k&quot;</span><br><span class="line">13 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)</span><br><span class="line">14 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status custom_git_stats time)</span><br><span class="line">17 POWERLEVEL9K_OS_ICON_FOREGROUND=&quot;blue&quot;</span><br></pre></td></tr></table></figure></p>
+<p>13-17行定义了zsh的prompt的样式，保存并退出，并在终端下执行source ~/.zshrc即可看到酷炫的zsh样式。如果有出现乱码，可先确定awesome-terminal-fonts是否安装出错，若已确认正确安装，仍出现乱码，可按照链接4安装Powerline fonts。并将POWERLEVEL9K_MODE=’awesome-fontconfig’注释掉。</p>
+<h1 id="配置vim"><a href="#配置vim" class="headerlink" title="配置vim"></a>配置vim</h1><h2 id="安装vundle"><a href="#安装vundle" class="headerlink" title="安装vundle"></a>安装vundle</h2><p>在终端下执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure></p>
+<p>即可安装vundle.</p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>打开.vimrc，如果没有则新建，在其中添加以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"> 1 set nocompatible</span><br><span class="line"> 2 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936</span><br><span class="line"> 3 set termencoding=utf-8</span><br><span class="line"> 4 set encoding=utf-8</span><br><span class="line"> 5 set nu</span><br><span class="line"> 6 &quot; 设置默认进行大小写不敏感查找</span><br><span class="line"> 7 set ignorecase</span><br><span class="line"> 8 &quot; 如果有一个大写字母，则切换到大小写敏感查找</span><br><span class="line"> 9 set smartcase</span><br><span class="line">10 &quot; vundle 环境设置</span><br><span class="line">11 filetype off</span><br><span class="line">12 set rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">13 &quot; vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间</span><br><span class="line">14 call vundle#begin()</span><br><span class="line">15 Plugin &apos;VundleVim/Vundle.vim&apos;</span><br><span class="line">16 Plugin &apos;scrooloose/nerdtree&apos;                &quot; file/directory treee</span><br><span class="line">17 Plugin &apos;scrooloose/nerdcommenter&apos;           &quot; code commenter</span><br><span class="line">18 Plugin &apos;kien/ctrlp.vim&apos;                     &quot; Fuzzy file, buffer, mru, tag, etc finder</span><br><span class="line">19 Plugin &apos;altercation/vim-colors-solarized&apos;</span><br><span class="line">20 Plugin &apos;tomasr/molokai&apos;</span><br><span class="line">21 Plugin &apos;jacoborus/tender&apos;</span><br><span class="line">22 Plugin &apos;Shougo/vimproc.vim&apos;</span><br><span class="line">23 &quot; 插件列表结束</span><br><span class="line">24 call vundle#end()</span><br><span class="line">25 filetype plugin indent on</span><br><span class="line">26 &quot; 配置 nerdtree</span><br><span class="line">27 autocmd vimenter * NERDTree # 添加此行即可使用nerdtree</span><br><span class="line">28 map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt; # 将打开nerdtree的快捷键定义为ctrl+n</span><br><span class="line">29 &quot; 配置 ctrlp</span><br><span class="line">30 let g:ctrlp_map = &apos;&lt;c-p&gt;&apos; # 定义ctrlp快捷键为 ctrl + p</span><br><span class="line">31 let g:ctrlp_cmd = &apos;CtrlP&apos; # 定义ctrlp命令为CtrlP</span><br><span class="line">32 let g:ctrlp_working_path_mode = &apos;ra&apos; # 定义ctrlp搜索模式为ra</span><br><span class="line">33 &quot; 配置 nerdcommenter</span><br><span class="line">34 let g:NERDSpaceDelims = 1 # 定义nerdcommenter默认在注释符号后面加一空格</span><br><span class="line">35 &quot; 配置 vim-colors-solarized</span><br><span class="line">36 &quot; syntax enable </span><br><span class="line">37 &quot; set background=dark</span><br><span class="line">38 &quot; colorscheme solarized</span><br><span class="line">39 &quot; 配置 molokai</span><br><span class="line">40 &quot; let g:molokai\_original = 1</span><br><span class="line">41 &quot; let g:rehash256 = 1</span><br><span class="line">42 &quot; 配置 tender </span><br><span class="line">43 syntax enable # 打开符号高亮</span><br><span class="line">44 colorscheme tender # 定义配色方案</span><br><span class="line">45 &quot; colorscheme molokai</span><br><span class="line">46 &quot; colorscheme solarized</span><br></pre></td></tr></table></figure></p>
+<p>10–25行定义了vundle的设置，vim插件需置于 vundle#begin() 和 vundle#end() 之间。27–28行定义了nerdtree的配置，可参照每行后的注释符号了解其意义。30–32定义ctrlp的配置。<br>nerdcommenter和scheme的设置也如上所示。另外，[vim插件库]<a href="https://vimawesome.com/" target="_blank" rel="noopener">https://vimawesome.com/</a>包含了大量的插件，及其安装和配置方法。</p>
+<h2 id="相关插件使用方法"><a href="#相关插件使用方法" class="headerlink" title="相关插件使用方法"></a>相关插件使用方法</h2><h3 id="nerdtree-插件使用方法"><a href="#nerdtree-插件使用方法" class="headerlink" title="nerdtree 插件使用方法"></a>nerdtree 插件使用方法</h3><p>nerdtree 快捷键如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">ctrl + w + h    光标 focus 左侧树形目录</span><br><span class="line">ctrl + w + l    光标 focus 右侧文件显示窗口</span><br><span class="line">ctrl + w + w    光标自动在左右侧窗口切换</span><br><span class="line">ctrl + w + r    移动当前窗口的布局位置</span><br><span class="line"></span><br><span class="line">o	展开当前所在目录</span><br><span class="line">O	递归的展开当前所在目录下的所有目录</span><br><span class="line">x       合拢选中结点的父目录</span><br><span class="line">X       递归 合拢选中结点下的所有目录</span><br><span class="line"></span><br><span class="line">i       (水平地)split 一个新窗口打开选中文件，并跳到该窗口</span><br><span class="line">gi      split 一个新窗口打开选中文件，但不跳到该窗口</span><br><span class="line">s       (竖直地)vsplit 一个新窗口打开选中文件，并跳到该窗口</span><br><span class="line">gs      vsplit 一个新 窗口打开选中文件，但不跳到该窗口 </span><br><span class="line"></span><br><span class="line">P       跳到根结点</span><br><span class="line">p       跳到父结点</span><br><span class="line">K       跳到当前目录下同级的第一个结点</span><br><span class="line">J       跳到当前目录下同级的最后一个结点</span><br><span class="line">k       跳到当前目录下同级的前一个结点</span><br><span class="line">j       跳到当前目录下同级的后一个结点</span><br><span class="line"></span><br><span class="line">C       将选中目录或选中文件的父目录设为根结点</span><br><span class="line">u       将当前根结点的父目录设为根目录，并变成合拢原根结点</span><br><span class="line">U       将当前根结点的父目录设为根目录，但保持展开原根结点</span><br><span class="line"></span><br><span class="line">m       显示文件系统菜单，然后根据提示进行文件的操作如新建，重命名等</span><br><span class="line">q       关闭 NerdTree 窗口</span><br><span class="line">?       切换是否显示 Quick Help</span><br><span class="line">e       Edit the current dif</span><br><span class="line"></span><br><span class="line">I       切换是否显示隐藏文件</span><br><span class="line">f       切换是否使用文件过滤器</span><br><span class="line">F       切换是否显示文件</span><br><span class="line">B       切换是否显示书签</span><br><span class="line"></span><br><span class="line">:tabnew [++opt选项] ［＋cmd］ 文件      建立对指定文件新的tab</span><br><span class="line">:tabc   关闭当前的 tab</span><br><span class="line">:tabo   关闭所有其他的 tab</span><br><span class="line">:tabs   查看所有打开的 tab</span><br><span class="line">:tabp   前一个 tab</span><br><span class="line">:tabn   后一个 tab</span><br><span class="line"></span><br><span class="line">gT      前一个 tab</span><br><span class="line">gt      后一个 tab</span><br></pre></td></tr></table></figure></p>
+<p>上面指令的前后顺序大致可以反映命令的使用频率从高到低的顺序。</p>
+<h3 id="ctrlp-使用方法"><a href="#ctrlp-使用方法" class="headerlink" title="ctrlp 使用方法"></a>ctrlp 使用方法</h3><p>ctrl + p 快捷键，在vim命令模式下，可以进行模糊查找，直接输入关键字即可查找，在插入模式下，ctrl + p 快捷键可以自动补全。</p>
+<h3 id="nerdcommenter-使用方法"><a href="#nerdcommenter-使用方法" class="headerlink" title="nerdcommenter 使用方法"></a>nerdcommenter 使用方法</h3><p>nerdcommenter 快捷键默认前缀为\，常用快捷键为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\cc	对当前行进行注释 </span><br><span class="line">\cu	对当前行去注释</span><br></pre></td></tr></table></figure></p>
+<p>配合vim ctrl + v在可视模式下，光标移动选择多行，可以进行多行的注释和去注释。</p>
+<h1 id="tmux安装及使用"><a href="#tmux安装及使用" class="headerlink" title="tmux安装及使用"></a>tmux安装及使用</h1><h2 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h2><p>debian系可直接使用apt-get进行安装，由于apt-get的版本相对较老，本文此案去了手动编译的方式，由于tmux依赖于libevent 2.x和ncurses，因此需要先编译安装以上两个依赖。分别在<a href="http://libevent.org" target="_blank" rel="noopener">http://libevent.org</a>和<a href="http://libevent.org" target="_blank" rel="noopener">http://libevent.org</a>下载压缩包，加压分别命名为libevent、ncurses，进入libevent，执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd libevent</span><br><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<p>进入ncurses执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ncurses</span><br><span class="line">export CPPFLAGS=&quot;-P&quot; # 如果不配置这个选项，会报错</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，执行以下命令，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/tmux/tmux.git</span><br><span class="line">cd tmux</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure &amp;&amp; make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<p>此时运行tmux，可能会报<em>/usr/local/lib/libevent-2.1.so.6 cannot open shared object file: No such file or directory</em>的错误，这是因为libevent安装在了/usr/local/lib中，而非/usr/lib中，此时可以执行下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/lib/libevent-2.1.so.6 /usr/lib/libevent-2.1.so.6</span><br></pre></td></tr></table></figure></p>
+<p>或者也可以直接拷贝进去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/local/lib/libevent-2.1.so.6 /usr/lib/</span><br></pre></td></tr></table></figure></p>
+<p>至此，tmux已经安装完毕</p>
+<h2 id="使用tmux"><a href="#使用tmux" class="headerlink" title="使用tmux"></a>使用tmux</h2><p>tmux的快捷键如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">ctrl + w + h    光标 focus 左侧树形目录</span><br><span class="line">ctrl + w + l    光标 focus 右侧文件显示窗口</span><br><span class="line">ctrl + w + w    光标自动在左右侧窗口切换</span><br><span class="line">ctrl + w + r    移动当前窗口的布局位置</span><br><span class="line"></span><br><span class="line">o	展开当前所在目录</span><br><span class="line">O	递归的展开当前所在目录下的所有目录</span><br><span class="line">x       合拢选中结点的父目录</span><br><span class="line">X       递归 合拢选中结点下的所有目录</span><br><span class="line"></span><br><span class="line">i       (水平地)split 一个新窗口打开选中文件，并跳到该窗口</span><br><span class="line">gi      split 一个新窗口打开选中文件，但不跳到该窗口</span><br><span class="line">s       (竖直地)vsplit 一个新窗口打开选中文件，并跳到该窗口</span><br><span class="line">gs      vsplit 一个新 窗口打开选中文件，但不跳到该窗口 </span><br><span class="line"></span><br><span class="line">P       跳到根结点</span><br><span class="line">p       跳到父结点</span><br><span class="line">K       跳到当前目录下同级的第一个结点</span><br><span class="line">J       跳到当前目录下同级的最后一个结点</span><br><span class="line">k       跳到当前目录下同级的前一个结点</span><br><span class="line">j       跳到当前目录下同级的后一个结点</span><br><span class="line"></span><br><span class="line">C       将选中目录或选中文件的父目录设为根结点</span><br><span class="line">u       将当前根结点的父目录设为根目录，并变成合拢原根结点</span><br><span class="line">U       将当前根结点的父目录设为根目录，但保持展开原根结点</span><br><span class="line"></span><br><span class="line">m       显示文件系统菜单，然后根据提示进行文件的操作如新建，重命名等</span><br><span class="line">q       关闭 NerdTree 窗口</span><br><span class="line">?       切换是否显示 Quick Help</span><br><span class="line">e       Edit the current dif</span><br><span class="line"></span><br><span class="line">I       切换是否显示隐藏文件</span><br><span class="line">f       切换是否使用文件过滤器</span><br><span class="line">F       切换是否显示文件</span><br><span class="line">B       切换是否显示书签</span><br><span class="line"></span><br><span class="line">:tabnew [++opt选项] ［＋cmd］ 文件      建立对指定文件新的tab</span><br><span class="line">:tabc   关闭当前的 tab</span><br><span class="line">:tabo   关闭所有其他的 tab</span><br><span class="line">:tabs   查看所有打开的 tab</span><br><span class="line">:tabp   前一个 tab</span><br><span class="line">:tabn   后一个 tab</span><br><span class="line"></span><br><span class="line">gT      前一个 tab</span><br><span class="line">gt      后一个 tab</span><br></pre></td></tr></table></figure></p>
+<p>上面指令的我前后顺序大致可以反映命令的使用频率从高到低的顺序。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zsh/" rel="tag"># zsh</a>
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+            <a href="/tags/tmux/" rel="tag"># tmux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/17/hexo-github-pages/" rel="next" title="hexo-github-pages">
+                <i class="fa fa-chevron-left"></i> hexo-github-pages
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjQ5My85MDU0"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="wxxcn" />
+            
+              <p class="site-author-name" itemprop="name">wxxcn</p>
+              <p class="site-description motion-element" itemprop="description">lengends never die</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxxcn" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxxcn@outlook.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x7EFC;&#x8FF0;" class="headerlink" title="&#x7EFC;&#x8FF0;"></a>&#x7EFC;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装配置zsh"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;&#x914D;&#x7F6E;zsh" class="headerlink" title="&#x5B89;&#x88C5;&#x914D;&#x7F6E;zsh"></a>&#x5B89;&#x88C5;&#x914D;&#x7F6E;zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装zsh"><span class="nav-number">2.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;zsh" class="headerlink" title="&#x5B89;&#x88C5;zsh"></a>&#x5B89;&#x88C5;zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置zsh"><span class="nav-number">2.2.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;zsh" class="headerlink" title="&#x914D;&#x7F6E;zsh"></a>&#x914D;&#x7F6E;zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装powerlevel9k"><span class="nav-number">2.2.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;powerlevel9k" class="headerlink" title="&#x5B89;&#x88C5;powerlevel9k"></a>&#x5B89;&#x88C5;powerlevel9k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装awesome-terminal-fonts"><span class="nav-number">2.2.2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;awesome-terminal-fonts" class="headerlink" title="&#x5B89;&#x88C5;awesome-terminal-fonts"></a>&#x5B89;&#x88C5;awesome-terminal-fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置zsh-1"><span class="nav-number">2.2.3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;zsh-1" class="headerlink" title="&#x914D;&#x7F6E;zsh"></a>&#x914D;&#x7F6E;zsh</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置vim"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;vim" class="headerlink" title="&#x914D;&#x7F6E;vim"></a>&#x914D;&#x7F6E;vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装vundle"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;vundle" class="headerlink" title="&#x5B89;&#x88C5;vundle"></a>&#x5B89;&#x88C5;vundle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装插件"><span class="nav-number">3.2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;&#x63D2;&#x4EF6;" class="headerlink" title="&#x5B89;&#x88C5;&#x63D2;&#x4EF6;"></a>&#x5B89;&#x88C5;&#x63D2;&#x4EF6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关插件使用方法"><span class="nav-number">3.3.</span> <span class="nav-text"><a href="#&#x76F8;&#x5173;&#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x76F8;&#x5173;&#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>&#x76F8;&#x5173;&#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nerdtree-插件使用方法"><span class="nav-number">3.3.1.</span> <span class="nav-text"><a href="#nerdtree-&#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="nerdtree &#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>nerdtree &#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ctrlp-使用方法"><span class="nav-number">3.3.2.</span> <span class="nav-text"><a href="#ctrlp-&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="ctrlp &#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>ctrlp &#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nerdcommenter-使用方法"><span class="nav-number">3.3.3.</span> <span class="nav-text"><a href="#nerdcommenter-&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="nerdcommenter &#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>nerdcommenter &#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tmux安装及使用"><span class="nav-number">4.</span> <span class="nav-text"><a href="#tmux&#x5B89;&#x88C5;&#x53CA;&#x4F7F;&#x7528;" class="headerlink" title="tmux&#x5B89;&#x88C5;&#x53CA;&#x4F7F;&#x7528;"></a>tmux&#x5B89;&#x88C5;&#x53CA;&#x4F7F;&#x7528;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装tmux"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;tmux" class="headerlink" title="&#x5B89;&#x88C5;tmux"></a>&#x5B89;&#x88C5;tmux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用tmux"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#&#x4F7F;&#x7528;tmux" class="headerlink" title="&#x4F7F;&#x7528;tmux"></a>&#x4F7F;&#x7528;tmux</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxxcn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64781615";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="true"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("93HRhECNgKOR9mmtFdrohLd4-gzGzoHsz", "MdMH233cxSy63uvspUHJ3bNh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+    <script type="text/javascript" color="0,0,0" opacity='0.7' 
+    src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</body>
+</html>
