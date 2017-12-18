@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="wxxcn&#39;s blog">
 <meta property="og:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：    1.https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide    2.https://docs.openc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-17T10:53:09.590Z">
+<meta property="og:updated_time" content="2017-12-18T13:06:34.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="install caffe on ubuntu16.04">
 <meta name="twitter:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：    1.https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide    2.https://docs.openc">
@@ -407,14 +407,14 @@
 <h2 id="编译源码-1"><a href="#编译源码-1" class="headerlink" title="编译源码"></a>编译源码</h2><p>最后，使用以下命令编译源码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">make all -j4</span><br><span class="line">make <span class="built_in">test</span> -j4</span><br><span class="line">make runtest -j4</span><br><span class="line">make pycaffe -j4</span><br><span class="line">make distribute -j4</span><br></pre></td></tr></table></figure></p>
 <p>如果以上没有报错，那么恭喜你，如果出现以下错误，可以进行如此修改：</p>
 <ol>
-<li>not found lboost_python3<br>解决方法，修改Makefile.config文件，将<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PYTHON_LIBRARIES := boost_python3 python3.5m</span><br><span class="line">PYTHON_INCLUDE := /usr/include/python3.5m \</span><br><span class="line">                 /usr/lib/python3.5/dist-packages/numpy/core/include</span><br></pre></td></tr></table></figure>
-</li>
+<li>not found lboost_python3</li>
 </ol>
+<p>解决方法，修改Makefile.config文件，将<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PYTHON_LIBRARIES := boost_python3 python3.5m</span><br><span class="line">PYTHON_INCLUDE := /usr/include/python3.5m \</span><br><span class="line">                 /usr/lib/python3.5/dist-packages/numpy/core/include</span><br></pre></td></tr></table></figure></p>
 <p>修改为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PYTHON_LIBRARIES := boost_python-py35 python3.5m</span><br><span class="line">PYTHON_INCLUDE := /usr/include/python3.5m \</span><br><span class="line">                 /usr/lib/python3.5/dist-packages/numpy/core/include</span><br></pre></td></tr></table></figure></p>
 <ol>
-<li>not found libopencv_core.so.3.2.0<br>这个为ld_library的问题，解决方法为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/ld.so.conf.d/opencv.conf</span><br></pre></td></tr></table></figure>
-</li>
+<li>not found libopencv_core.so.3.2.0</li>
 </ol>
+<p>这个为ld_library的问题，解决方法为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/ld.so.conf.d/opencv.conf</span><br></pre></td></tr></table></figure></p>
 <p>添加以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib</span><br></pre></td></tr></table></figure></p>
 <p>/usr/local/lib为我的ibopencv_core.so.3.2.0所在的文件夹，你需要修改为你的相应文件夹</p>
 
