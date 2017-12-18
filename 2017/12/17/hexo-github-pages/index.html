@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html [hexo 官网]https://hexo.io/">
+<meta name="description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html  [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html  [hexo 官网]https://hexo.i">
 <meta name="keywords" content="hexo,github,node.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用hexo和github搭建自己的博客">
 <meta property="og:url" content="http://yoursite.com/2017/12/17/hexo-github-pages/index.html">
 <meta property="og:site_name" content="wxxcn&#39;s blog">
-<meta property="og:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html [hexo 官网]https://hexo.io/">
+<meta property="og:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html  [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html  [hexo 官网]https://hexo.i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-18T12:07:14.600Z">
+<meta property="og:updated_time" content="2017-12-18T15:58:00.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用hexo和github搭建自己的博客">
-<meta name="twitter:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html [hexo 官网]https://hexo.io/">
+<meta name="twitter:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  [next 官网–主题配置]http://theme-next.iissnan.com/theme-settings.html  [next 官网–第三方服务]http://theme-next.iissnan.com/theme-settings.html  [hexo 官网]https://hexo.i">
 
 
 
@@ -389,12 +389,17 @@
       
         <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：</p>
 <ol>
-<li>[next 官网–主题配置]<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a></li>
-<li>[next 官网–第三方服务]<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a></li>
-<li>[hexo 官网]<a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></li>
-<li>[nodejs 官网]<a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions" target="_blank" rel="noopener">https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions</a></li>
+<li><p>[next 官网–主题配置]<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a></p>
+</li>
+<li><p>[next 官网–第三方服务]<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a></p>
+</li>
+<li><p>[hexo 官网]<a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></p>
+</li>
+<li><p>[nodejs 官网]<a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions" target="_blank" rel="noopener">https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions</a></p>
+</li>
 <li><a href="https://github.com/isLishude/blog/issues/62" target="_blank" rel="noopener">https://github.com/isLishude/blog/issues/62</a></li>
 </ol>
+<a id="more"></a>
 <h1 id="安装Nodejs和hexo"><a href="#安装Nodejs和hexo" class="headerlink" title="安装Nodejs和hexo"></a>安装Nodejs和hexo</h1><p>由于我使用的是ubuntu 16.04，debian系的系统可以采用如下方式安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure></p>
 <p>然后，将npm的源换成淘宝的源：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
 <p>hexo的安装方式如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>

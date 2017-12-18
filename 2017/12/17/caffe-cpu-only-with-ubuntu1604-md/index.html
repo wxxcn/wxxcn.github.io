@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：    1.https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide    2.https://docs.openc">
+<meta name="description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接： 1. &amp;lt;https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide&amp;gt; 2. &amp;lt;https://do">
 <meta name="keywords" content="caffe,python3,opencv">
 <meta property="og:type" content="article">
 <meta property="og:title" content="install caffe on ubuntu16.04">
 <meta property="og:url" content="http://yoursite.com/2017/12/17/caffe-cpu-only-with-ubuntu1604-md/index.html">
 <meta property="og:site_name" content="wxxcn&#39;s blog">
-<meta property="og:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：    1.https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide    2.https://docs.openc">
+<meta property="og:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接： 1. &amp;lt;https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide&amp;gt; 2. &amp;lt;https://do">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-18T13:06:34.284Z">
+<meta property="og:updated_time" content="2017-12-18T16:00:08.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="install caffe on ubuntu16.04">
-<meta name="twitter:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：    1.https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide    2.https://docs.openc">
+<meta name="twitter:description" content="综述本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是CPU ONLY版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接： 1. &amp;lt;https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide&amp;gt; 2. &amp;lt;https://do">
 
 
 
@@ -387,7 +387,12 @@
       
 
       
-        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是<strong>CPU ONLY</strong>版本，至于<br>为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：<br>    1.<a href="https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide" target="_blank" rel="noopener">https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide</a><br>    2.<a href="https://docs.opencv.org/3.2.0/d7/d9f/tutorial_linux_install.html" target="_blank" rel="noopener">https://docs.opencv.org/3.2.0/d7/d9f/tutorial_linux_install.html</a><br>    3.<a href="http://www.linuxidc.com/Linux/2016-12/138870.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-12/138870.htm</a>和<br>        <a href="http://www.linuxidc.com/Linux/2016-12/138870p2.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-12/138870p2.htm</a><br><a id="more"></a></p>
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍在ubuntu 16.04 系统上编译安装caffe，请注意这里是<strong>CPU ONLY</strong>版本，至于为什么是cpu only，我也很无奈这台台式机不带GPU。本文主要参考了以下链接：</p>
+<pre><code>1. &lt;https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide&gt;
+2. &lt;https://docs.opencv.org/3.2.0/d7/d9f/tutorial_linux_install.html&gt;
+3. &lt;http://www.linuxidc.com/Linux/2016-12/138870.htm&gt;和
+    &lt;http://www.linuxidc.com/Linux/2016-12/138870p2.htm&gt;
+</code></pre><a id="more"></a>
 <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get install -y build-essential cmake git pkg-config</span><br><span class="line">sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev \</span><br><span class="line">libhdf5-serial-dev protobuf-compiler</span><br><span class="line">sudo apt-get install -y libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line">sudo apt-get install -y --no-install-recommends libboost-all-dev</span><br><span class="line">sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br><span class="line">sudo apt-get install -y python3-dev <span class="comment">#已有可不必安装</span></span><br><span class="line">sudo apt-get install -y python3-numpy python3-scipy</span><br></pre></td></tr></table></figure>
 <p>其中 -y 选项可以省略</p>
 <h1 id="安装opencv-3-2-0"><a href="#安装opencv-3-2-0" class="headerlink" title="安装opencv 3.2.0"></a>安装opencv 3.2.0</h1><h2 id="安装依赖-1"><a href="#安装依赖-1" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[compiler] sudo apt-get install build-essential</span><br><span class="line">[required] sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev \</span><br><span class="line">libavformat-dev libswscale-dev</span><br><span class="line">sudo apt-get install liblapacke-dev checkinstall <span class="comment">#1</span></span><br><span class="line">[optional] sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev \</span><br><span class="line">libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev</span><br></pre></td></tr></table></figure>
