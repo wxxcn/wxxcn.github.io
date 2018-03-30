@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="wxxcn&#39;s blog">
 <meta property="og:description" content="综述PCA算法，即主成分分析法（Principal Components Analysis, PCA），是常用的降维方法。总的来说，降维有以下优点，这些优点通常也是我们选择降维的原因。降维的优点如下：  避免维数灾难。当数据维度增加时，要维持相同程度的密采样所需要的样本数量会成指数级增长。比如，在[0, 1]区间内每隔0.01单位采样，仅需要100个采样点。而在三维空间中，如果将0.01小方格为采">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T08:50:25.000Z">
+<meta property="og:updated_time" content="2018-03-30T09:04:16.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PCA算法">
 <meta name="twitter:description" content="综述PCA算法，即主成分分析法（Principal Components Analysis, PCA），是常用的降维方法。总的来说，降维有以下优点，这些优点通常也是我们选择降维的原因。降维的优点如下：  避免维数灾难。当数据维度增加时，要维持相同程度的密采样所需要的样本数量会成指数级增长。比如，在[0, 1]区间内每隔0.01单位采样，仅需要100个采样点。而在三维空间中，如果将0.01小方格为采">
@@ -426,7 +426,7 @@
 <p>$$\kappa(x_i, x_j)=\phi(x_i)^T\phi(x_j)=\phi(x_j)^T\phi(x_i) \tag {13}$$</p>
 <p>将式(12), (13)带入(10)式即可得到</p>
 <p>$$<br>\sum_{i=1}^m\phi(x_i)(\sum_{j=1}^m\kappa(x_i, x_j)\alpha_j-\lambda\alpha_i)=0<br>\tag {14}<br>$$</p>
-<p>令$K_{ij}=\kappa(x_i, x_j)$，$A={\alpha_i;…;\alpha_m}$，则A为m*d的矩阵，有</p>
+<p>令$K_{ij}=\kappa(x_i, x_j)$，$A=[\alpha_i;…;\alpha_m]$，则A为m*d的矩阵，有</p>
 <p>$$KA=\lambda A \tag {15}$$<br>将K进行奇异值分解即可得到${\alpha_i, i=1,2,…,m}$，下面来整理一下维度，$x_i$为n维列向量，则X为$n*m$的矩阵，$\alpha_i$为d维行向量，则A为$m*d$的矩阵，K为$m*m$的矩阵，则KA仍然为$m*d$的矩阵。<br>令$z_i=W^T\phi(x_i)$,  则$z_i$为$d*1$的向量。核化PCA将$n*1$的向量降维为$d*1$的向量。则</p>
 <p>$$<br>z_j=W^T\phi(x_j)=\sum_{i=1}^{m} \alpha_i^T \phi(x_i)^T x_j=\sum_{i=1}^{m} \alpha_i^T \kappa(x_i, x_j) \tag {16}<br>$$<br>将其向量化即可得到</p>
 <p>$$Z=A^TK \tag {17}$$</p>
