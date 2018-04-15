@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。这也直接造成了">
+<meta name="description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。">
 <meta name="keywords" content="cuda9.1,cudnn7.1,ubuntu16.04">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 16.04 CUDA9.1+cuDNN7.1安装">
 <meta property="og:url" content="http://yoursite.com/2018/04/16/ubuntu-cuda-cudnn/index.html">
 <meta property="og:site_name" content="wxxcn&#39;s blog">
-<meta property="og:description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。这也直接造成了">
+<meta property="og:description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/images/driver-select.png">
 <meta property="og:image" content="http://yoursite.com/images/nvidia.png">
-<meta property="og:updated_time" content="2018-04-15T15:42:22.994Z">
+<meta property="og:updated_time" content="2018-04-15T15:47:55.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 16.04 CUDA9.1+cuDNN7.1安装">
-<meta name="twitter:description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。这也直接造成了">
+<meta name="twitter:description" content="前言说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。">
 <meta name="twitter:image" content="http://yoursite.com/images/driver-select.png">
 
 
@@ -390,7 +390,7 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。这也直接造成了<br><a id="more"></a><br>另一方面的原因，初学者倾向于去网上找教程，而网上的教程往往参差不齐，且别人依样画葫芦的时候却可能出现问题，而有的教程可谓是远古级别了，已经无法适应迭代更新快速的今天。因此，本文在参考了网上的教程和英伟达的官方文档之后，结合自己的思考写下此教程。另外，本次平台搭建的环境如下：</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说起深度学习平台的搭建，很多人可能会想起被cuda支配的恐惧。但其实到了现在，随着Nvidia的重视，情况确实有所改善，但cuda的安装对于一个新手来说，依旧不是那么友好。一方面可能是文档的原因，不得不说其实Nvidia的英文文档其实已经很详尽了，但长篇累牍加上阅读时的间成本，实在让人没有兴趣。<a id="more"></a>这也直接造成了另一方面的原因，初学者倾向于去网上找教程，而网上的教程往往参差不齐，且别人依样画葫芦的时候却可能出现问题，而有的教程可谓是远古级别了，已经无法适应迭代更新快速的今天。因此，本文在参考了网上的教程和英伟达的官方文档之后，结合自己的思考写下此教程。另外，本次平台搭建的环境如下：</p>
 <ol>
 <li>系统 Ubuntu16.04</li>
 <li>N卡 Nvidia GeForce GT 740M</li>
@@ -410,9 +410,9 @@
 <p>首先保证禁用nouveau成功，然后<br>从<a href="http://www.nvidia.cn/Download/index.aspx?lang=cn" target="_blank" rel="noopener">英伟达驱动下载</a><br>选择合适的驱动进行下载，例如，我的选择如下图所示<br><img src="/images/driver-select.png" alt="驱动选择"><br>点击搜索并下载，将其放在$home目录下，即/home/xxx/下，同时按下CTRL+ALT+F1进入<br>tty1，输入以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo service lightdm stop  <span class="comment">#关闭图形界面</span></span><br><span class="line"><span class="built_in">cd</span> ~ <span class="comment"># 进入家目录</span></span><br><span class="line">sudo chmod a+x  NVIDIA-Linux-x86_64-xxx.xx.run <span class="comment">#修改执行权限</span></span><br><span class="line">sudo ./chmod a+x  NVIDIA-Linux-x86_64-xxx.xx.run --no-opengl-files <span class="comment">#运行</span></span><br></pre></td></tr></table></figure></p>
 <p>注意再运行时最好加上–no-opengl-files选项，防止无限重启图形界面。<br>安装完成后，输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nvidia-smi</span><br></pre></td></tr></table></figure></p>
 <p>如果出现类似下面的图形，则证明安装驱动成功<br><img src="/images/nvidia.png" alt="结果显示"></p>
-<h1 id="安装Cuda"><a href="#安装Cuda" class="headerlink" title="安装Cuda"></a>安装Cuda</h1><p>如果已经安装了Nvidia驱动的话，可以直接跳到<a href="#正式安装Cuda">正式安装Cuda</a>环节，如果尚未安装好驱动的话，请从<a href="#安装前准备">安装前准备</a>开始</p>
+<h1 id="安装Cuda"><a href="#安装Cuda" class="headerlink" title="安装Cuda"></a>安装Cuda</h1><p>如果已经安装了Nvidia驱动的话，可以直接跳到<em>正式安装Cuda</em>环节，如果尚未安装好驱动的话，请从<em>安装前准备</em>开始</p>
 <h2 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h2><ol>
-<li><a href="## 禁用Nouveau">禁用nouveau</a></li>
+<li><em>禁用nouveau</em></li>
 <li>重启进入text mode， 参考<a href="https://linoxide.com/ubuntu-how-to/5-steps-start-ubuntu-text-mode/" target="_blank" rel="noopener">Ubuntu16.04 进入text mode</a>此链接，可与上一步的重启合并。</li>
 </ol>
 <h2 id="正式安装Cuda"><a href="#正式安装Cuda" class="headerlink" title="正式安装Cuda"></a>正式安装Cuda</h2><p>针对Ubuntu 16.04，Cuda的安装有两种形式，一种是Run installer，另一种是Deb installer，本文选用Run installer.</p>
