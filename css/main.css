@@ -1827,7 +1827,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #03fffa;
+  background: #b125a7;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2930,4 +2930,12 @@ blockquote {
   background: #f7f7f7;
   border-radius: 3px;
   border-left: 4px solid #86ceec;
+}
+.forkme {
+  display: none;
+}
+@media (min-width: 768px) {
+  .forkme {
+    display: inline;
+  }
 }
