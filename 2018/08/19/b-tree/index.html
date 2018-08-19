@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="wxxcn&#39;s blog">
 <meta property="og:description" content="综述本文主要介绍B树的概念、方法以及实现。本文的完整代码可以在我的github找到。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-19T07:08:16.257Z">
+<meta property="og:updated_time" content="2018-08-19T08:56:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="B树">
 <meta name="twitter:description" content="综述本文主要介绍B树的概念、方法以及实现。本文的完整代码可以在我的github找到。">
@@ -399,11 +399,11 @@
 <ol>
 <li>每个结点x具有以下属性：<ul>
 <li>x.n，当前存储在结点x中的关键字</li>
-<li>x.n个关键字本身$x.key_0, x.key_1, x.key<em>2, …, x.key</em>{n-1}$，以非降序存放</li>
+<li>x.n个关键字本身$x.key_0, x.key_1, x.key_2, …, x.key_{n-1}$，以非降序存放</li>
 <li>x.leaf，bool值。如果x为叶结点，则为TRUE; 否则为FALSE</li>
 </ul>
 </li>
-<li>每个结点x还包含x.n+1个指向其孩子的指针$x.c_0, x.c_1, x.c<em>2, …, x.c</em>{n-1}$, 叶结点没有孩子，所以它们的$c_i$属性没有定义。</li>
+<li>每个结点x还包含x.n+1个指向其孩子的指针$x.c_0, x.c_1, x.c_2, …, x.c_{n-1}$, 叶结点没有孩子，所以它们的$c_i$属性没有定义。</li>
 <li>每个结点x以其关键字进行分割，即$x.key_{i-1}&lt;= k &lt;= x.key_i$，则关键字k所在的结点在以$x.c_i$为根的子树上。</li>
 <li>每个叶结点具有相同的深度，即树的高度h。</li>
 <li>每个结点所包含的关键字个数有上界和下界。以<strong>最小度数</strong>$t&gt;=2$来表示这些界。除了根结点以外的每个结点包含的结点个数满足$t-1 &lt;= x.n &lt;= 2t-1$。</li>
