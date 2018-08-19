@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  next 官网–主题配置  next 官网–第三方服务  hexo 官网  nodejs 官网  https://github.com/isLishude/blog/issues/62">
+<meta name="description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，以及一些第三方插件的使用。">
 <meta name="keywords" content="hexo,github,node.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用hexo和github搭建自己的博客">
 <meta property="og:url" content="http://yoursite.com/2017/12/17/hexo-github-pages/index.html">
 <meta property="og:site_name" content="wxxcn&#39;s blog">
-<meta property="og:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  next 官网–主题配置  next 官网–第三方服务  hexo 官网  nodejs 官网  https://github.com/isLishude/blog/issues/62">
+<meta property="og:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，以及一些第三方插件的使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-22T03:43:05.289Z">
+<meta property="og:updated_time" content="2018-08-19T06:07:42.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用hexo和github搭建自己的博客">
-<meta name="twitter:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：  next 官网–主题配置  next 官网–第三方服务  hexo 官网  nodejs 官网  https://github.com/isLishude/blog/issues/62">
+<meta name="twitter:description" content="综述本文主要介绍如何利用github以及hexo搭建自己的博客，以及一些第三方插件的使用。">
 
 
 
@@ -387,19 +387,7 @@
       
 
       
-        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍如何利用github以及hexo搭建自己的博客，本文主要参考了以下链接：</p>
-<ol>
-<li><p><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next 官网–主题配置</a></p>
-</li>
-<li><p><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next 官网–第三方服务</a></p>
-</li>
-<li><p><a href="https://hexo.io/" target="_blank" rel="noopener">hexo 官网</a></p>
-</li>
-<li><p><a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions" target="_blank" rel="noopener">nodejs 官网</a></p>
-</li>
-<li><a href="https://github.com/isLishude/blog/issues/62" target="_blank" rel="noopener">https://github.com/isLishude/blog/issues/62</a></li>
-</ol>
-<a id="more"></a>
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍如何利用github以及hexo搭建自己的博客，以及一些第三方插件的使用。<br><a id="more"></a></p>
 <h1 id="安装Nodejs和hexo"><a href="#安装Nodejs和hexo" class="headerlink" title="安装Nodejs和hexo"></a>安装Nodejs和hexo</h1><p>由于我使用的是ubuntu 16.04，debian系的系统可以采用如下方式安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure></p>
 <p>然后，将npm的源换成淘宝的源：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
 <p>hexo的安装方式如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
@@ -424,6 +412,18 @@
 <h3 id="配置头像及站点标志"><a href="#配置头像及站点标志" class="headerlink" title="配置头像及站点标志"></a>配置头像及站点标志</h3><p>在主题配置文件中，修改字段avatar如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avatar: /path/to/your/avatar</span><br></pre></td></tr></table></figure></p>
 <p>将/path/to/your/avatar设置成你的图片所在的路径，如我在xxx.github.io/source/下新建了images文件夹，并将我的图片放在其中，路径设置为/images/avatar.jpg，注意不要加source。<br>同样在主题配置文件中，设置favicon字段如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">favicon: </span><br><span class="line">  small: /images/avatar.jpg</span><br><span class="line">  medium: /images/avatar.jpg</span><br><span class="line">  apple_touch_icon: /images/avatar.jpg</span><br><span class="line">  safari_pinned_tab: /images/avatar.jpg</span><br></pre></td></tr></table></figure></p>
 <h3 id="集成第三方服务"><a href="#集成第三方服务" class="headerlink" title="集成第三方服务"></a>集成第三方服务</h3><p>关于更多主题配置和第三方服务设置，请参考链接[next主题配置]<a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html</a>以及[next第三方服务集成]<a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/third-party-services.html</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>本文主要参考了以下链接：</p>
+<ol>
+<li><p><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next 官网–主题配置</a></p>
+</li>
+<li><p><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next 官网–第三方服务</a></p>
+</li>
+<li><p><a href="https://hexo.io/" target="_blank" rel="noopener">hexo 官网</a></p>
+</li>
+<li><p><a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions" target="_blank" rel="noopener">nodejs 官网</a></p>
+</li>
+<li><a href="https://github.com/isLishude/blog/issues/62" target="_blank" rel="noopener">https://github.com/isLishude/blog/issues/62</a></li>
+</ol>
 
       
     </div>
@@ -553,7 +553,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -564,7 +564,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -575,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -624,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x7EFC;&#x8FF0;" class="headerlink" title="&#x7EFC;&#x8FF0;"></a>&#x7EFC;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Nodejs和hexo"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;Nodejs&#x548C;hexo" class="headerlink" title="&#x5B89;&#x88C5;Nodejs&#x548C;hexo"></a>&#x5B89;&#x88C5;Nodejs&#x548C;hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建并部署到github-pages"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github-pages" class="headerlink" title="&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github pages"></a>&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更换hexo主题"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;" class="headerlink" title="&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;"></a>&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装next主题"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;next&#x4E3B;&#x9898;" class="headerlink" title="&#x5B89;&#x88C5;next&#x4E3B;&#x9898;"></a>&#x5B89;&#x88C5;next&#x4E3B;&#x9898;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题设置"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;" class="headerlink" title="next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;"></a>next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择scheme"><span class="nav-number">4.2.1.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;scheme" class="headerlink" title="&#x9009;&#x62E9;scheme"></a>&#x9009;&#x62E9;scheme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置菜单"><span class="nav-number">4.2.2.</span> <span class="nav-text"><a href="#&#x8BBE;&#x7F6E;&#x83DC;&#x5355;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x83DC;&#x5355;"></a>&#x8BBE;&#x7F6E;&#x83DC;&#x5355;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置头像及站点标志"><span class="nav-number">4.2.3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;" class="headerlink" title="&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;"></a>&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成第三方服务"><span class="nav-number">4.2.4.</span> <span class="nav-text"><a href="#&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;" class="headerlink" title="&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;"></a>&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x7EFC;&#x8FF0;" class="headerlink" title="&#x7EFC;&#x8FF0;"></a>&#x7EFC;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Nodejs和hexo"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;Nodejs&#x548C;hexo" class="headerlink" title="&#x5B89;&#x88C5;Nodejs&#x548C;hexo"></a>&#x5B89;&#x88C5;Nodejs&#x548C;hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建并部署到github-pages"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github-pages" class="headerlink" title="&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github pages"></a>&#x521B;&#x5EFA;&#x5E76;&#x90E8;&#x7F72;&#x5230;github pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更换hexo主题"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;" class="headerlink" title="&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;"></a>&#x66F4;&#x6362;hexo&#x4E3B;&#x9898;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装next主题"><span class="nav-number">4.1.</span> <span class="nav-text"><a href="#&#x5B89;&#x88C5;next&#x4E3B;&#x9898;" class="headerlink" title="&#x5B89;&#x88C5;next&#x4E3B;&#x9898;"></a>&#x5B89;&#x88C5;next&#x4E3B;&#x9898;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题设置"><span class="nav-number">4.2.</span> <span class="nav-text"><a href="#next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;" class="headerlink" title="next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;"></a>next&#x4E3B;&#x9898;&#x8BBE;&#x7F6E;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择scheme"><span class="nav-number">4.2.1.</span> <span class="nav-text"><a href="#&#x9009;&#x62E9;scheme" class="headerlink" title="&#x9009;&#x62E9;scheme"></a>&#x9009;&#x62E9;scheme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置菜单"><span class="nav-number">4.2.2.</span> <span class="nav-text"><a href="#&#x8BBE;&#x7F6E;&#x83DC;&#x5355;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x83DC;&#x5355;"></a>&#x8BBE;&#x7F6E;&#x83DC;&#x5355;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置头像及站点标志"><span class="nav-number">4.2.3.</span> <span class="nav-text"><a href="#&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;" class="headerlink" title="&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;"></a>&#x914D;&#x7F6E;&#x5934;&#x50CF;&#x53CA;&#x7AD9;&#x70B9;&#x6807;&#x5FD7;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成第三方服务"><span class="nav-number">4.2.4.</span> <span class="nav-text"><a href="#&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;" class="headerlink" title="&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;"></a>&#x96C6;&#x6210;&#x7B2C;&#x4E09;&#x65B9;&#x670D;&#x52A1;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</span></a></li></ol></div>
             
 
           </div>
@@ -716,8 +716,6 @@
   
 
 
-  
-
 
 
 
@@ -745,9 +743,6 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="true"></script>
 
 
   
@@ -1271,7 +1266,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1279,9 +1274,6 @@
 
   
 
-  
-    <script type="text/javascript" color="0,0,0" opacity='0.7' 
-    src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

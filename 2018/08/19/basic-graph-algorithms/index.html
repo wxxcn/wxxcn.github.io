@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dfs,bfs,强连通分量," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="综述本文主要介绍图的基本算法，包括图的表示、深度优先搜索和广度优先搜索、拓扑排序以及强连通分量等。本文的完整代码可以在我的github找到。">
+<meta name="keywords" content="dfs,bfs,强连通分量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图基本算法">
+<meta property="og:url" content="http://yoursite.com/2018/08/19/basic-graph-algorithms/index.html">
+<meta property="og:site_name" content="wxxcn&#39;s blog">
+<meta property="og:description" content="综述本文主要介绍图的基本算法，包括图的表示、深度优先搜索和广度优先搜索、拓扑排序以及强连通分量等。本文的完整代码可以在我的github找到。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/bfs.png">
+<meta property="og:image" content="http://yoursite.com/images/g.png">
+<meta property="og:image" content="http://yoursite.com/images/gt.png">
+<meta property="og:image" content="http://yoursite.com/images/scc.png">
+<meta property="og:updated_time" content="2018-08-19T07:23:53.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图基本算法">
+<meta name="twitter:description" content="综述本文主要介绍图的基本算法，包括图的表示、深度优先搜索和广度优先搜索、拓扑排序以及强连通分量等。本文的完整代码可以在我的github找到。">
+<meta name="twitter:image" content="http://yoursite.com/images/bfs.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/19/basic-graph-algorithms/"/>
+
+
+
+
+
+  <title>图基本算法 | wxxcn's blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wxxcn's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/basic-graph-algorithms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wxxcn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wxxcn's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图基本算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T14:20:34+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/19/basic-graph-algorithms/" class="leancloud_visitors" data-flag-title="图基本算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文主要介绍图的基本算法，包括图的表示、深度优先搜索和广度优先搜索、拓扑排序以及强连通分量等。本文的完整代码可以在我的<a href="https://github.com/wxxcn/Algorithms" target="_blank" rel="noopener">github</a>找到。<a id="more"></a></p>
+<h1 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h1><p>图为定点和边的结合，常用图G=(V, E)来标记。图有两种常见的表示方法：邻接链表法和邻接矩阵法。邻接链表法记录一个数组Adj，数组的大小为|V|，数组的每个元素Adj[u]为一个链表，链表指向以u为起点的边。邻接矩阵法使用一个二维数组Adj来表示图，数组的维度为$|V|^2$，数组中的元素Adj[u][v]表示是否存在从u到v的边。图可以分为有向图和无向图。当一条边存在于无向图中，则其反向边也存在于无向图中，有向图则不一定。</p>
+<p>对于权重图，邻接链接法只需在链表的结点出增加一个权重属性，邻接矩阵法则在相应的边上存放相应的权重，如果该边不存在，用0或者$\infty$表示。邻接链表法表示的图其python代码示例如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">INF = float(<span class="string">'inf'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, v, w)</span>:</span></span><br><span class="line">        self.v = v</span><br><span class="line">        self.w = w</span><br><span class="line">        self.pre = <span class="keyword">None</span></span><br><span class="line">        self.next = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkGraph</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        self.n = n</span><br><span class="line">        self.adj = n * [<span class="keyword">None</span>]</span><br></pre></td></tr></table></figure></p>
+<h1 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h1><p>对于图G=(V, E)，广度优先搜索从一个源结点s出发，系统性地遍历所有s能到达的结点。记$d[v]$为从源结点s到v所经历的最短边。在广度优先搜索总是先遍历$d[v]=k$的边，再遍历$d[v]=k+1$的边。广度优先搜索的python代码示例如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(self, s)</span>:</span></span><br><span class="line">    d = self.n * [INF]</span><br><span class="line">    color = self.n * [<span class="string">'white'</span>]</span><br><span class="line">    parent = self.n * [<span class="keyword">None</span>]</span><br><span class="line">    d[s] = <span class="number">0</span></span><br><span class="line">    color[s] = <span class="string">'gray'</span></span><br><span class="line">    queue = [s]</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        u = queue.pop(<span class="number">0</span>)</span><br><span class="line">        node = self.adj[u]</span><br><span class="line">        <span class="keyword">while</span> node:</span><br><span class="line">            v = node.v</span><br><span class="line">            <span class="keyword">if</span> color[v] == <span class="string">'white'</span>:</span><br><span class="line">                color[v] = <span class="string">'gray'</span></span><br><span class="line">                d[v] = d[u] + <span class="number">1</span></span><br><span class="line">                parent[v] = u</span><br><span class="line">                queue.append(v)</span><br><span class="line"></span><br><span class="line">            node = node.next</span><br><span class="line"></span><br><span class="line">        color[u] = <span class="string">'black'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parent</span><br></pre></td></tr></table></figure></p>
+<p>广度优先搜索使用一个先进先出的队列，此处使用python的列表作为队列使用。此处的广度优先搜索记录了从源结点s到v所经历的边数d[v]、v的前驱结点parent[v]。color[v]是为了避免重复访问某结点而是设置的状态数组。如果color[v]为白色，则结点v尚未被访问；如果color[v]为灰色，则结点v已经被访问，而结点v的邻接结点尚未访问完；如果color[v]为黑色，则结点v的邻接结点已经被访问完。实际上，如果没有特殊的要求，我们只需要两个状态就可以进行广度优先搜索，即黑和白。此是我们可以用一个bool数组flar[v]保存状态，初始时均为False，当访问到结点v，即将其设为True。</p>
+<blockquote>
+<p>对于图G=(V, E)和源结点s，我们定义图G的前驱子图为$G<em>\pi=(V</em>\pi, E<em>\pi), V</em>\pi={v\in V:v.\pi \neq NIL } \bigcup{s}, E_\pi={(v.\pi, v): v\in V -{s}}$</p>
+<p>如果$V<em>\pi$由从源结点s可以到达的结点组成，且对于所有$v\in V</em>\pi$，子图$G<em>\pi$包含一条从s到v的简单路径（不成环），且该路径为图G从s到v的最短路径（边最少），则前驱子图$G</em>\pi$为一棵广度优先树。</p>
+</blockquote>
+<p>广度优先搜索的parent数组所得到前驱子图即为一棵广度优先树。下图为一个无环图。</p>
+<div align="center"><img src="/images/bfs.png" width="400"></div><br>从源结点2出发进行广度优先搜索，即可得到广度优先树中的所有边，也称为树边。我们将s=2到所有结点的路径打印如下：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2 to 0: 2-&gt;1-&gt;0</span><br><span class="line">2 to 1: 2-&gt;1</span><br><span class="line">2 to 3: 2-&gt;3</span><br><span class="line">2 to 4: 2-&gt;3-&gt;4</span><br><span class="line">2 to 5: 2-&gt;3-&gt;5</span><br><span class="line">2 to 6: 2-&gt;3-&gt;5-&gt;6</span><br><span class="line">2 to 7: 2-&gt;3-&gt;4-&gt;7</span><br></pre></td></tr></table></figure><br><br># 深度优先搜索<br>深度优先搜索，故名思义，总是尽可能往图的深处进行搜索。深度优先搜索的前驱子图形成一个由多棵深度优先树构成的深度优先森林。如果广度优先树，每一棵深度优先树的边也称为树边。其python代码实已如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs_visit</span><span class="params">(self, u, color, parent, d, f, time)</span>:</span></span><br><span class="line">    time[<span class="number">0</span>] += <span class="number">1</span></span><br><span class="line">    d[u] = time[<span class="number">0</span>]</span><br><span class="line">    color[u] = <span class="string">'gray'</span></span><br><span class="line">    cur = self.adj[u]</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        v = cur.v</span><br><span class="line">        <span class="keyword">if</span> color[v] == <span class="string">'white'</span>:</span><br><span class="line">            parent[v] = u</span><br><span class="line">            self.dfs_visit(v, color, parent, d, f, time)</span><br><span class="line">        cur = cur.next</span><br><span class="line">    time[<span class="number">0</span>] += <span class="number">1</span></span><br><span class="line">    f[u] = time[<span class="number">0</span>]</span><br><span class="line">    color[u] = <span class="string">'black'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self)</span>:</span></span><br><span class="line">    color = self.n * [<span class="string">'white'</span>]</span><br><span class="line">    parent = self.n * [<span class="keyword">None</span>]</span><br><span class="line">    d = self.n * [<span class="number">-1</span>]</span><br><span class="line">    f = self.n * [<span class="number">-1</span>]</span><br><span class="line">    time = [<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> u <span class="keyword">in</span> range(self.n):</span><br><span class="line">        <span class="keyword">if</span> color[u] == <span class="string">'white'</span>:</span><br><span class="line">            self.dfs_visit(u, color, parent, d, f, time)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> d, f, parent</span><br></pre></td></tr></table></figure><br><br>深度优先搜索中d记录除此到达的时间实际上也为广度有效搜索的最短路径，记录完成时间，即对v完成深度优先搜索时的时间。color也可以如广度优先搜索只用两种状态来表示。为了将time作为引用传递，将time设为数组。对一个结点进行深度优先搜索，可以用dfs<em>visit过程。<br><br>上述使用三种状态的颜色，其实并非完全没有作用。有以下引理<br>&gt;一个有向图G是无环的当且仅当对其的深度优先搜索不产生后向边。<br><br>对图G深度优先搜索得到的深度优先森林$G</em>\pi$，有以下四种边的定义：<br>1. 树边：深度优先森林$G_\pi$的边。如果结点v是因算法对边的探索而首先被发现，则(u, v)是一条树边<br>2. 后向边：结点u连接在其在深度优先树中的一个祖先结点v的边，自循环也是后向边。<br>3. 前向边：是结点u连接在其在深度优先树中一个后代结点v的边(u, v)。<br>4. 横向边：除上述边之外的所有的边。只要一个结点不是另一个结点的祖先。<br><br>在深度优先搜索中可以根据保存的数组信息，判断边的类型。当第一次访问边(u, v)时，结点v的颜色可以帮助我们判别<br>1. 结点v的颜色为白色，则表明(u, v)时树边<br>2. 结点v为灰色，边(u, v)为后向边<br>3. 结点v为黑色，边(u, v)为前向边或者横向边。<br><br>当结点v为黑色时，如何判断横向边或者前向边，可以借助d和f两个数组。首先引入括号化定理：<br>&gt; 对于有向图或无向图进行深度优先搜索时，对于任意的两个结点u和v，以下三种情况只有一种成立：<br>1. [u.d, u.f]和[v.d, v.f]完全分离，u不为v的后代， v不为u的后代<br>2. [u.d, u.f]完全包含在[v.d, v.f]内，则u为v的后代。<br>3. [v.d, v.f]完全包含在[u.d, u.f]内，则v为u的后代。<br><br>上数三种情况有且仅有一种成立。因此，可以据此证明当结点v为黑色时，如果过u.d &lt; v.d，则(u, v)为前向边；当u.d &gt; v.d时，为横向边。当u.d &lt; v.d时，因为u.f &gt; v.f ，则根据括号化定理，则u为v的祖先。否则，v.d &lt; u.d, 然而v.f &lt; u.f, 则 [u.d, u.f]和[v.d, v.f]完全分离，u和v不是祖先和后代的关系。<br># 拓扑排序<br>对于有向无环图G=(V, E)，拓扑排序是所有结点的一种线性次序，该次序满足以下条件：如果图包含边(u, v)，则结点u在拓扑排序中排在v的前面。拓扑排序基本思路很简单，就是对树进行深度优先搜索，每个结点的搜索完成时，将其插入到链表的头部。其python代码示例如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topo_sort</span><span class="params">(self)</span>:</span></span><br><span class="line">_, f, _, = self.dfs()</span><br><span class="line">d = []</span><br><span class="line"><span class="keyword">for</span> v, k <span class="keyword">in</span> enumerate(f):</span><br><span class="line">    d.append((k, v))</span><br><span class="line"></span><br><span class="line">d = sorted(d, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>], reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> d:</span><br><span class="line">    print(item[<span class="number">1</span>])</span><br></pre></td></tr></table></figure><br><br>这里直接调用dfs，得到其完成时间的数组f，对数组f进行降序排序，即可得到其拓扑排序。<br># 强连通分量<br>对于有向图G=(V, E)的强连通分量是一个最大结点结合$c \subseteq V$, 对于该集合的任意一对结点u和v，u和v可以互相到达。求解强连通分量的基本依据为：图G中的强连通分量和图G的转置$G^T$完全相同。$G^T$即为将图G中的边全部反向得到的图。其python代码示例如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse</span><span class="params">(self)</span>:</span></span><br><span class="line">    g = LinkGraph(self.n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n):</span><br><span class="line">        cur = self.adj[i]</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            v = cur.v</span><br><span class="line">            g.insert(v, i, <span class="number">1</span>)</span><br><span class="line">            cur = cur.next</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> g</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scc</span><span class="params">(self)</span>:</span></span><br><span class="line">    g = self.reverse()</span><br><span class="line">    flag = g.n * [<span class="keyword">False</span>]</span><br><span class="line">    q = []</span><br><span class="line">    <span class="keyword">for</span> u <span class="keyword">in</span> range(g.n):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> flag[u]:</span><br><span class="line">            g.dfs_scc(u, flag, <span class="number">-1</span>, q=q)</span><br><span class="line"></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    flag = self.n * [<span class="keyword">False</span>]</span><br><span class="line">    com = self.n * [<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">for</span> u <span class="keyword">in</span> q:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> flag[u]:</span><br><span class="line">            self.dfs_scc(u, flag, count, com)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> com</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs_scc</span><span class="params">(self, u, flag, count, com=None, q=None)</span>:</span></span><br><span class="line">    flag[u] = <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">if</span> com:</span><br><span class="line">        com[u] = count</span><br><span class="line">    cur = self.adj[u]</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        v = cur.v</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> flag[v]:</span><br><span class="line">            self.dfs_scc(v, flag, count, com, q)</span><br><span class="line">        cur = cur.next</span><br><span class="line">    <span class="keyword">if</span> q <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        q.insert(<span class="number">0</span>, u)</span><br></pre></td></tr></table></figure><br><br>强连通分量并不复杂，上面的代码基本思路如下：<br>1. 求解图G的转置图$G^T$。<br>2. 对$G^T$进行深度优先搜索，根据结点完成时间降序排列，对图G进行深度优先搜索，并得到每一个结点对应的分量。<br><br>可以看到dfs_scc和dfs_visit基本一致，只不过我们根据我们的目的做了微小的改动。我们并没有保存完成时间，而是当结点完成后，将其插入在列表q的前面，从而得到按照完成时间降序排列的结点集，然后对图G进行深度优先搜索，在深度优先搜索的过程中，为每个结点赋予其分量的编号。如果$com[i]=j$在第i个结点在第j个强连通分量上。从一个连通分量上的任意一个结点出发，该连通分量的所有点都将被访问，flag设置为True。因此，进入几次dfs_scc函数，有几个强连通分量。<br><br>如果将强连通分量视为一个结点，则有强连通分量构成的图必定为有向无环图。在进行第二次深度优先搜索（即对图G进行深度优先搜索）时，按照$G^T$深度优先搜索的完成时间进行遍历的原因可见下面的图解。<br><br>假设图G中存在两个强连通分量A, B，且这两个强连通分量有边相连，则从A到B的所有边的方向必然一致。如果不一致，则A, B为同一个强连通分量，与假设不符。不失一般性，我们只画出强连通分量的之间的一条边。如下图所示：<br><div align="center"><img src="/images/g.png" width="150"></div>
+
+<p>因为从A到B有一条有向边，则强连通分量A中的所有结点的完成时间都大于强连通分量B中的完成时间。则如果按照完成时间降序对$G^T$进行深度优先搜索，则必然先对强连通分量A中的结点进行深度优先搜索。$G^T$如下图所示：</p>
+<div align="center"><img src="/images/gt.png" width="150"></div>
+
+<p>若先对强连通分量A中的结点进行深度优先搜索，则B中的结点一定不会被所引索引到，从而将不同的强连通分量隔离开。当然，先对图G进行搜索还是先对<br>图$G^T$进行搜索结果都是一样的。</p>
+<p>假设原来的图G如下：</p>
+<div align="center"><img src="/images/scc.png" width="400"></div>
+
+<p>则其强连通分量的输出结果com如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 下标 强连通分量</span><br><span class="line">0 3</span><br><span class="line">1 3</span><br><span class="line">2 3</span><br><span class="line">3 1</span><br><span class="line">4 2</span><br><span class="line">5 1</span><br><span class="line">6 2</span><br><span class="line">7 0</span><br></pre></td></tr></table></figure></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>本文主要参考《算法导论》。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dfs/" rel="tag"># dfs</a>
+          
+            <a href="/tags/bfs/" rel="tag"># bfs</a>
+          
+            <a href="/tags/强连通分量/" rel="tag"># 强连通分量</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/19/hash-table/" rel="next" title="散列表">
+                <i class="fa fa-chevron-left"></i> 散列表
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/19/min-spanning-tree/" rel="prev" title="最小生成树">
+                最小生成树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjQ5My85MDU0"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="wxxcn" />
+            
+              <p class="site-author-name" itemprop="name">wxxcn</p>
+              <p class="site-description motion-element" itemprop="description">lengends never die</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wxxcn" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wxxcn@outlook.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x7EFC;&#x8FF0;" class="headerlink" title="&#x7EFC;&#x8FF0;"></a>&#x7EFC;&#x8FF0;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的表示"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x56FE;&#x7684;&#x8868;&#x793A;" class="headerlink" title="&#x56FE;&#x7684;&#x8868;&#x793A;"></a>&#x56FE;&#x7684;&#x8868;&#x793A;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广度优先搜索"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;" class="headerlink" title="&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;"></a>&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wxxcn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=64781615";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("93HRhECNgKOR9mmtFdrohLd4-gzGzoHsz", "MdMH233cxSy63uvspUHJ3bNh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>
